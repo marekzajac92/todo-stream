@@ -10,24 +10,14 @@
 }
 
 <div class="row" style="height: 100%">
-    <div class="col-md-3 gray smaller full-height">
+    <div class="col-md-3 yesterday smaller full-height">
         <h3 class="text-center">Yesterday</h3>
-        @foreach (var item in Model.Where(x => x.Deadline.Date == (DateTime.Now.Date.AddDays(-1))))
+        @foreach (var item in Model.Where(x => x.Date.Date == (DateTime.Now.Date.AddDays(-1))))
         {
-            <div class="task">
-                <h4><b>@item.Name</b></h4>
-                <hr />
-                <p>
-                    @(item.Description != null ? Html.Raw(item.Description.Replace("\n", "<br/>")) : new MvcHtmlString(""))
+            <div class="task @(item.IsDone ? "done" : "")">
+                <p class="text-right">
+                    <a href="@Url.Action("Remove", "Task", new {id = item.Id})" class="btn btn-danger small-btn"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
                 </p>
-            </div>
-        }
-    </div>
-    <div class="col-md-6 bordered full-height">
-        <h3 class="text-center">Today</h3>
-        @foreach (var item in Model.Where(x => x.Deadline.Date == DateTime.Now.Date))
-        {
-            <div class="task">
                 <h4><b>@item.Name</b></h4>
                 <hr/>
                 <p>
@@ -36,13 +26,36 @@
             </div>
         }
     </div>
-    <div class="col-md-3 gray smaller full-height">
-        <h3 class="text-center">Tomorrow</h3>
-        @foreach (var item in Model.Where(x => x.Deadline.Date == (DateTime.Now.Date.AddDays(1))))
+    <div class="col-md-6 today full-height">
+        <h3 class="text-center">Today</h3>
+        @foreach (var item in Model.Where(x => x.Date.Date == DateTime.Now.Date))
         {
-            <div class="task">
+            <div class="task @(item.IsDone ? "done" : "")">
+                <p class="text-right">
+                    <a href="@Url.Action("Remove", "Task", new {id = item.Id})" class="btn btn-danger small-btn"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+                    @if (!item.IsDone)
+                    {
+                        <a href="@Url.Action("Done", "Task", new {id = item.Id})" class="btn btn-success small-btn"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></a>
+                    }
+                </p>
                 <h4><b>@item.Name</b></h4>
-                <hr />
+                <hr/>
+                <p>
+                    @(item.Description != null ? Html.Raw(item.Description.Replace("\n", "<br/>")) : new MvcHtmlString(""))
+                </p>
+            </div>
+        }
+    </div>
+    <div class="col-md-3 tommorow smaller full-height">
+        <h3 class="text-center">Tomorrow</h3>
+        @foreach (var item in Model.Where(x => x.Date.Date == (DateTime.Now.Date.AddDays(1))))
+        {
+            <div class="task @(item.IsDone ? "done" : "")">
+                <p class="text-right">
+                    <a href="@Url.Action("Remove", "Task", new {id = item.Id})" class="btn btn-danger small-btn"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+                </p>
+                <h4><b>@item.Name</b></h4>
+                <hr/>
                 <p>
                     @(item.Description != null ? Html.Raw(item.Description.Replace("\n", "<br/>")) : new MvcHtmlString(""))
                 </p>

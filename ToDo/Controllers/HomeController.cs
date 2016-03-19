@@ -22,8 +22,8 @@ namespace ToDo.Controllers
                 _context.Tasks.ToList();
             model = model.Where(
                 x =>
-                    x.Deadline.Date >= (DateTime.Now.Date.AddDays(-1)) &&
-                    x.Deadline.Date <= (DateTime.Now.Date.AddDays(1))).ToList();
+                    x.Date.Date >= (DateTime.Now.Date.AddDays(-1)) &&
+                    x.Date.Date <= (DateTime.Now.Date.AddDays(1))).ToList();
             return View(model);
         }
     }

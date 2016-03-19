@@ -30,7 +30,7 @@ namespace ToDo.Controllers
             {
                 return View(task);
             }
-
+            task.IsDone = false;
             _context.Tasks.Add(task);
             _context.SaveChanges();
 
@@ -40,8 +40,24 @@ namespace ToDo.Controllers
         public ActionResult Remove(int? id)
         {
             var task = _context.Tasks.Find(id);
-            _context.Tasks.Remove(task);
-            _context.SaveChanges();
+            if (task != null)
+            {
+                _context.Tasks.Remove(task);
+                _context.SaveChanges();
+            }
+
+            return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult Done(int? id)
+        {
+            var task = _context.Tasks.Find(id);
+            if (task != null)
+            {
+                task.IsDone = true;
+                _context.Entry(task).State = EntityState.Modified;
+                _context.SaveChanges();
+            }
 
             return RedirectToAction("Index", "Home");
         }

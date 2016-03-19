@@ -10,8 +10,8 @@ namespace ToDo.Models
         [Required]
         public string Name { get; set; }
         [Required]
-        public DateTime Deadline { get; set; }
+        public DateTime Date { get; set; }
         public string Description { get; set; }
-        public virtual Category Category { get; set; } 
+        public bool IsDone { get; set; }
     }
 }

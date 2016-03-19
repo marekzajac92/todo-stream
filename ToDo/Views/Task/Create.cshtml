@@ -1,24 +1,43 @@
 ﻿@model ToDo.Models.Task
 
+@section Nav
+{
+    <li>
+        <p class="navbar-text">
+            <b>New task</b>
+        </p>
+    </li>
+}
+
 <div class="row">
     <div class="col-md-4"></div>
     <div class="col-md-4">
         @using (Html.BeginForm("Create", "Task", FormMethod.Post))
         {
             <form>
+                @Html.ValidationMessageFor(model => model.Name)
                 <div class="form-group">
                     <label>Name</label>
-                    @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+                    @Html.TextBoxFor(model => model.Name, new {@class = "form-control"})
                 </div>
+                @Html.ValidationMessageFor(model => model.Date)
                 <div class="form-group">
                     <label>Date</label>
-                    @Html.TextBoxFor(model => model.Deadline, new { @class = "input-date form-control" })
+                    @Html.TextBoxFor(model => model.Date, new {@class = "input-date form-control"})
                 </div>
                 <div class="form-group">
                     <label>Description</label>
                     <textarea name="Description" class="form-control" rows="3"></textarea>
                 </div>
-                <button type="submit" class="btn btn-default">Add</button>
+                <div class="row">
+                    <div class="col-md-6">
+                        <button type="submit" class="btn btn-primary btn-block">Add</button>
+                    </div>
+                    <div class="col-md-6">
+                        @Html.ActionLink("Cancel", "Index", new {controller = "Home"}, new {@class = "btn btn-default btn-block"})
+                    </div>
+                </div>
+
             </form>
         }
     </div>

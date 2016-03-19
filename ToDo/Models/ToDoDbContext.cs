@@ -9,7 +9,6 @@ namespace ToDo.Models
             
         }
 
-        public DbSet<Category> Categories { get; set; }
         public DbSet<Task> Tasks { get; set; }  
     }
 }

@@ -130,7 +130,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TaskController.cs" />
-    <Compile Include="Enums\CategoryColor.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -142,8 +141,15 @@
     <Compile Include="Migrations\201603182004424_Changes.Designer.cs">
       <DependentUpon>201603182004424_Changes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201603190908029_RemovedCategory.cs" />
+    <Compile Include="Migrations\201603190908029_RemovedCategory.Designer.cs">
+      <DependentUpon>201603190908029_RemovedCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603190944370_RenameDateField.cs" />
+    <Compile Include="Migrations\201603190944370_RenameDateField.Designer.cs">
+      <DependentUpon>201603190944370_RenameDateField.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Task.cs" />
     <Compile Include="Models\ToDoDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -286,6 +292,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201603182004424_Changes.resx">
       <DependentUpon>201603182004424_Changes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603190908029_RemovedCategory.resx">
+      <DependentUpon>201603190908029_RemovedCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603190944370_RenameDateField.resx">
+      <DependentUpon>201603190944370_RenameDateField.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
