@@ -1,0 +1,52 @@
+﻿@model IEnumerable<ToDo.Models.Task>
+
+@section Nav
+{
+    <li>
+        <p class="navbar-btn">
+            @Html.ActionLink("New task", "Create", new { controller = "Task" }, new { @class = "btn btn-success" })
+        </p>
+    </li>
+}
+
+<div class="row" style="height: 100%">
+    <div class="col-md-3 gray smaller full-height">
+        <h3 class="text-center">Yesterday</h3>
+        @foreach (var item in Model.Where(x => x.Deadline.Date == (DateTime.Now.Date.AddDays(-1))))
+        {
+            <div class="task">
+                <h4><b>@item.Name</b></h4>
+                <hr />
+                <p>
+                    @(item.Description != null ? Html.Raw(item.Description.Replace("\n", "<br/>")) : new MvcHtmlString(""))
+                </p>
+            </div>
+        }
+    </div>
+    <div class="col-md-6 bordered full-height">
+        <h3 class="text-center">Today</h3>
+        @foreach (var item in Model.Where(x => x.Deadline.Date == DateTime.Now.Date))
+        {
+            <div class="task">
+                <h4><b>@item.Name</b></h4>
+                <hr/>
+                <p>
+                    @(item.Description != null ? Html.Raw(item.Description.Replace("\n", "<br/>")) : new MvcHtmlString(""))
+                </p>
+            </div>
+        }
+    </div>
+    <div class="col-md-3 gray smaller full-height">
+        <h3 class="text-center">Tomorrow</h3>
+        @foreach (var item in Model.Where(x => x.Deadline.Date == (DateTime.Now.Date.AddDays(1))))
+        {
+            <div class="task">
+                <h4><b>@item.Name</b></h4>
+                <hr />
+                <p>
+                    @(item.Description != null ? Html.Raw(item.Description.Replace("\n", "<br/>")) : new MvcHtmlString(""))
+                </p>
+            </div>
+        }
+    </div>
+</div>
