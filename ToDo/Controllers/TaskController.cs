@@ -1,20 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Web;
+﻿using System.Data.Entity;
 using System.Web.Mvc;
 using ToDo.Models;
+using ToDo.Services;
+using ToDo.Services.Interfaces;
+using ToDo.ViewModels;
 
 namespace ToDo.Controllers
 {
     public class TaskController : Controller
     {
-        private ToDoDbContext _context;
+        private readonly ITaskService _taskService;
 
         public TaskController()
         {
-            _context = new ToDoDbContext();
+            _taskService = new TaskService();
         }
         
         [HttpGet]
@@ -24,40 +23,27 @@ namespace ToDo.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(Task task)
+        public ActionResult Create(CreateTaskViewModel task)
         {
             if (!ModelState.IsValid)
             {
                 return View(task);
             }
-            task.IsDone = false;
-            _context.Tasks.Add(task);
-            _context.SaveChanges();
+            _taskService.Create(task);
 
             return RedirectToAction("Index", "Home");
         }
 
         public ActionResult Remove(int? id)
         {
-            var task = _context.Tasks.Find(id);
-            if (task != null)
-            {
-                _context.Tasks.Remove(task);
-                _context.SaveChanges();
-            }
-
+            _taskService.Remove(id);
+            
             return RedirectToAction("Index", "Home");
         }
 
         public ActionResult Done(int? id)
         {
-            var task = _context.Tasks.Find(id);
-            if (task != null)
-            {
-                task.IsDone = true;
-                _context.Entry(task).State = EntityState.Modified;
-                _context.SaveChanges();
-            }
+            _taskService.Done(id);
 
             return RedirectToAction("Index", "Home");
         }

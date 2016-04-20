@@ -1,0 +1,13 @@
+﻿@using ToDo.Helpers.Html
+@model ToDo.ViewModels.TaskViewModel
+
+<div class="task @(Model.IsDone ? "done" : "")">
+    <p class="text-right">
+        @Html.RemoveButton(Model.Id)
+    </p>
+    <h4><b>@Model.Name</b></h4>
+    <hr />
+    <p>
+        @Html.DisplayDescription(Model.Description)
+    </p>
+</div>

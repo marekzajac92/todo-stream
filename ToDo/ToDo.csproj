@@ -133,6 +133,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\Html\DescriptionHelper.cs" />
+    <Compile Include="Helpers\Html\TaskButtonsHelper.cs" />
     <Compile Include="Migrations\201603160044312_Initial.cs" />
     <Compile Include="Migrations\201603160044312_Initial.Designer.cs">
       <DependentUpon>201603160044312_Initial.cs</DependentUpon>
@@ -153,6 +155,11 @@
     <Compile Include="Models\Task.cs" />
     <Compile Include="Models\ToDoDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Interfaces\ITaskService.cs" />
+    <Compile Include="Services\TaskService.cs" />
+    <Compile Include="ViewModels\CreateTaskViewModel.cs" />
+    <Compile Include="ViewModels\HomeViewModel.cs" />
+    <Compile Include="ViewModels\TaskViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-datepicker.css" />
@@ -274,6 +281,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Task\Create.cshtml" />
+    <Content Include="Views\Home\Partial\TaskPartialView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
