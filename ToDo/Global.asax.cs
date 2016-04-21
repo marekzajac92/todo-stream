@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using FluentValidation.Mvc;
+using ToDo.App_Start;
 
 namespace ToDo
 {
@@ -16,6 +18,8 @@ namespace ToDo
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            AutoMapperConfig.Initialize();
+            FluentValidationModelValidatorProvider.Configure();
         }
     }
 }

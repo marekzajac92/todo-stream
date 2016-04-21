@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using ToDo.Models;
-using ToDo.Services;
+﻿using System.Web.Mvc;
 using ToDo.Services.Interfaces;
-using ToDo.ViewModels;
 
 namespace ToDo.Controllers
 {
@@ -14,9 +7,9 @@ namespace ToDo.Controllers
     {
         private readonly ITaskService _taskService;
 
-        public HomeController()
+        public HomeController(ITaskService taskService)
         {
-            _taskService = new TaskService();
+            _taskService = taskService;
         }
 
         public ActionResult Index()

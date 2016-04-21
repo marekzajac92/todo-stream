@@ -11,9 +11,9 @@ namespace ToDo.Controllers
     {
         private readonly ITaskService _taskService;
 
-        public TaskController()
+        public TaskController(ITaskService taskService)
         {
-            _taskService = new TaskService();
+            _taskService = taskService;
         }
         
         [HttpGet]

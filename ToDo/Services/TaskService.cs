@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using AutoMapper;
 using ToDo.Models;
 using ToDo.Services.Interfaces;
 using ToDo.ViewModels;
@@ -21,12 +22,7 @@ namespace ToDo.Services
         {
             var tasks = _context.Tasks.ToList();
 
-            var vm = new HomeViewModel()
-            {
-                YesterdayTasks = GetTasksForDate(tasks, DateTime.Now.AddDays(-1).Date).Select(taskToTaskViewModel).ToList(),
-                TodayTasks = GetTasksForDate(tasks, DateTime.Now.Date).Select(taskToTaskViewModel).ToList(),
-                TomorrowTasks = GetTasksForDate(tasks, DateTime.Now.AddDays(1).Date).Select(taskToTaskViewModel).ToList(),
-            };
+            var vm = Mapper.Map<HomeViewModel>(tasks);
 
             return vm;
         }
@@ -63,31 +59,9 @@ namespace ToDo.Services
             return _context.Tasks.Find(id);
         }
 
-        private IEnumerable<Task> GetTasksForDate(IEnumerable<Task> tasks ,DateTime date)
-        {
-            return tasks.Where(x => x.Date.Date == date.Date);
-        }
-
-        private TaskViewModel taskToTaskViewModel(Task task)
-        {
-            return new TaskViewModel()
-            {
-                Id = task.Id,
-                IsDone = task.IsDone,
-                Description = task.Description,
-                Name = task.Name
-            };
-        }
-
         private Task createTaskViewModelToTask(CreateTaskViewModel vm)
         {
-            return new Task()
-            {
-                IsDone = false,
-                Date = vm.Date,
-                Description = vm.Description,
-                Name = vm.Name
-            };
+            return Mapper.Map<Task>(vm);
         }
     }
 }
